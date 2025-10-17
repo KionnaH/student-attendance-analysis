@@ -1,0 +1,156 @@
+:root{
+  --bg-start:#f8fafc;
+  --bg-end:#eef2ff;
+  --surface:#ffffff;
+  --border:#e5e7eb;
+  --text:#0f172a;
+  --muted:#64748b;
+
+  --primary:#6366f1;     /* indigo */
+  --primary-700:#4f46e5;
+  --accent:#22c55e;      /* green */
+  --accent-700:#16a34a;
+  --warning:#f59e0b;     /* amber */
+  --danger:#ef4444;      /* red */
+}
+
+/* Base */
+html,body{
+  margin:0;
+  padding:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color:var(--text);
+  background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
+  min-height:100%;
+}
+
+main{
+  max-width:1100px;
+  margin:2.25rem auto;
+  padding:0 1rem;
+}
+
+h1{
+  margin:0 0 1.25rem 0;
+  font-size:2rem;
+  font-weight:800;
+  letter-spacing:.2px;
+  text-align:center;
+  color:var(--primary-700);
+  position:relative;
+}
+
+h1::after{
+  content:"";
+  display:block;
+  width:72px;
+  height:4px;
+  margin:.5rem auto 0;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius:999px;
+}
+
+/* Charts layout */
+#charts-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:28px;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+/* Chart card */
+.chart{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px 14px 6px;
+  box-shadow:0 10px 20px rgba(2,6,23,.06), 0 2px 6px rgba(2,6,23,.04);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.chart:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 28px rgba(2,6,23,.08), 0 6px 12px rgba(2,6,23,.05);
+}
+
+/* Axis + titles created by D3 */
+.axis-label{
+  font-size:12px;
+  fill:var(--muted);
+}
+.chart-title{
+  font-size:16px;
+  font-weight:700;
+  fill:var(--text);
+}
+
+/* Make D3 axes clean */
+svg .domain, svg .tick line{
+  stroke:#cbd5e1; /* slate-300 */
+}
+svg .tick text{
+  fill:var(--muted);
+  font-size:12px;
+}
+
+/* Bars */
+.bar{
+  fill:var(--primary);
+  rx:6; /* soft corners */
+}
+.bar:hover{
+  fill:var(--primary-700);
+  filter:brightness(1.02);
+}
+.bar2{
+  fill:var(--accent);
+  rx:6;
+}
+.bar2:hover{
+  fill:var(--accent-700);
+  filter:brightness(1.02);
+}
+
+/* If you want two distinct colors for the two bar2 columns */
+#bar-chart svg g rect.bar2:nth-of-type(1){ fill:var(--danger); }
+#bar-chart svg g rect.bar2:nth-of-type(2){ fill:var(--accent); }
+
+/* Tooltip */
+.tooltip{
+  position:absolute;
+  pointer-events:none;
+  padding:8px 10px;
+  background:rgba(15,23,42,.92); /* near-black with alpha */
+  color:#fff;
+  border:1px solid rgba(148,163,184,.3);
+  border-radius:10px;
+  font-size:12px;
+  line-height:1.25;
+  box-shadow:0 8px 18px rgba(2,6,23,.25);
+  opacity:0;
+  transform:translateY(-2px);
+  backdrop-filter: blur(4px);
+}
+
+/* Small details */
+svg text{
+  user-select:none;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+#status-message{
+  text-align:center;
+  margin-top:14px;
+  color:var(--muted);
+  font-style:italic;
+}
+
+/* Responsive */
+@media (max-width: 680px){
+  h1{ font-size:1.6rem; }
+  .chart{ width:100%; }
+}
+
+.chart { padding: 20px; }
+.chart svg { overflow: visible; }
